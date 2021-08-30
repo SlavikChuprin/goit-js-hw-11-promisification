@@ -9,14 +9,14 @@ const randomIntegerFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+
 const makeTransaction = (transaction) => {
-  const delay = randomIntegerFromInterval(200, 500);
-  
+const delay = randomIntegerFromInterval(200, 500);   
    return new Promise ((res, rej)=> {
   setTimeout(() => {
     const canProcess = Math.random() > 0.3;
        if (canProcess) {
-     res(transaction.id, delay);
+     res([transaction.id, delay]);
     } else {
       rej(transaction.id);
     }
@@ -39,9 +39,8 @@ const makeTransaction = (transaction) => {
 //   }, delay);
 // };
 
-const logSuccess = (id, time) => {
-    console.log(time);
-  console.log(`Transaction ${id} processed in ${time}ms`);
+const logSuccess = ([id, time]) => {
+    console.log(`Transaction ${id} processed in ${time}ms`);
 };
 
 const logError = id => {
